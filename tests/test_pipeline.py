@@ -1,5 +1,6 @@
 """
 Unit tests for Cryptocurrency Risk Analysis & Clustering Pipeline
+CS2235 Data Science Capstone Project
 """
 
 import os
@@ -15,8 +16,8 @@ def test_feature_matrix_exists_and_valid():
     assert len(df) >= 25, f"Expected at least 25 assets, found {len(df)}"
     
     required_cols = [
-        "Symbol", "Annualized_Volatility_%", "Max_Drawdown_%", "VaR_95_%",
-        "CVaR_95_%", "Mean_Daily_Spread_%", "Log_Avg_Volume_USD", "Volume_Volatility_CV"
+        "Symbol", "Annualized_Volatility_%", "Max_Drawdown_%", 
+        "Mean_Daily_Spread_%", "Log_Avg_Volume_USD", "Vol_to_Volume_Ratio"
     ]
     for col in required_cols:
         assert col in df.columns, f"Missing required column: {col}"
@@ -58,9 +59,9 @@ def test_serialized_models_and_prediction():
     kmeans = joblib.load(kmeans_path)
     pca = joblib.load(pca_path)
     
-    # Test sample prediction with an 8-feature dummy vector
-    # [Vol, MDD, VaR95, CVaR95, Spread, LogVol, VolCV, VolToVol]
-    sample_vec = np.array([[75.0, 70.0, 6.5, 9.0, 5.0, 9.0, 0.8, 8.3]])
+    # Test sample prediction with 5-feature vector (Module 4)
+    # [Annualized_Vol, Max_Drawdown, Mean_Daily_Spread, Log_Avg_Volume, Vol_to_Volume_Ratio]
+    sample_vec = np.array([[75.0, 70.0, 5.0, 9.0, 8.3]])
     scaled_vec = scaler.transform(sample_vec)
     
     pred_cluster = kmeans.predict(scaled_vec)

@@ -1,13 +1,13 @@
 """
-Generates a professional 8-slide PowerPoint presentation (.pptx)
+Generates an 8-slide PowerPoint presentation (.pptx)
 for the CS2235 Capstone Project Presentation & Viva.
+Aligned directly with Modules 1 to 5.
 """
 
 import os
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
-from pptx.enum.text import PP_ALIGN
 
 def create_presentation(output_path="presentation/crypto_risk_clustering_presentation.pptx"):
     prs = Presentation()
@@ -19,14 +19,10 @@ def create_presentation(output_path="presentation/crypto_risk_clustering_present
     SLATE = RGBColor(74, 85, 104)     # #4A5568
     BLUE = RGBColor(49, 130, 206)     # #3182CE
     GREEN = RGBColor(47, 133, 90)     # #2F855A
-    WHITE = RGBColor(255, 255, 255)
-    LIGHT_BG = RGBColor(247, 250, 252) # #F7FAFC
     
     blank_layout = prs.slide_layouts[6]
     
-    # Helper to add standard header
     def add_header(slide, title_text, category_text="CS2235 DATA SCIENCE CAPSTONE PROJECT"):
-        # Header background banner
         top_box = slide.shapes.add_textbox(Inches(0.8), Inches(0.4), Inches(11.7), Inches(1.2))
         tf = top_box.text_frame
         tf.word_wrap = True
@@ -44,7 +40,6 @@ def create_presentation(output_path="presentation/crypto_risk_clustering_present
         p1.font.bold = True
         p1.font.color.rgb = NAVY
         
-    # Helper to add card container
     def add_card(slide, left, top, width, height, title, body_bullets, title_color=NAVY):
         box = slide.shapes.add_textbox(Inches(left), Inches(top), Inches(width), Inches(height))
         tf = box.text_frame
@@ -68,8 +63,6 @@ def create_presentation(output_path="presentation/crypto_risk_clustering_present
     # SLIDE 1: TITLE SLIDE
     # -------------------------------------------------------------
     s1 = prs.slides.add_slide(blank_layout)
-    
-    # Title box
     t_box = s1.shapes.add_textbox(Inches(1.0), Inches(1.8), Inches(11.3), Inches(3.8))
     tf1 = t_box.text_frame
     tf1.word_wrap = True
@@ -81,180 +74,168 @@ def create_presentation(output_path="presentation/crypto_risk_clustering_present
     p.font.color.rgb = NAVY
     
     p_sub = tf1.add_paragraph()
-    p_sub.text = "Grouping Digital Assets into Empirical Risk Tiers via Unsupervised Price Volatility & Trading Volume Clustering"
+    p_sub.text = "Grouping Cryptocurrencies into Similar Risk Categories via K-Means Clustering"
     p_sub.font.size = Pt(19)
     p_sub.font.color.rgb = BLUE
     p_sub.space_before = Pt(10)
-    
-    p_div = tf1.add_paragraph()
-    p_div.text = "____________________________________________________________________________________"
-    p_div.font.size = Pt(12)
-    p_div.font.color.rgb = RGBColor(226, 232, 240)
     
     p_meta = tf1.add_paragraph()
     p_meta.text = "RV University | School of Computer Science & Engineering | B.Sc (Hons.) Data Science"
     p_meta.font.size = Pt(13)
     p_meta.font.bold = True
     p_meta.font.color.rgb = SLATE
-    p_meta.space_before = Pt(15)
+    p_meta.space_before = Pt(20)
     
     p_team = tf1.add_paragraph()
-    p_team.text = "Researcher: Thanisha S Rao  |  Course Code: CS2235  |  Instructors: Prof. Muralidhar Billa, Prof. Thirukumaran Subbiramani"
+    p_team.text = "Researcher: Thanisha S Rao  |  Course: CS2235 Data Science  |  Instructors: Prof. Muralidhar Billa, Prof. Thirukumaran Subbiramani"
     p_team.font.size = Pt(12)
     p_team.font.color.rgb = SLATE
 
     # -------------------------------------------------------------
-    # SLIDE 2: PROBLEM STATEMENT & MOTIVATION
+    # SLIDE 2: PROBLEM STATEMENT & SYLLABUS MAPPING
     # -------------------------------------------------------------
     s2 = prs.slides.add_slide(blank_layout)
-    add_header(s2, "Problem Statement & Financial Motivation")
+    add_header(s2, "Problem Statement & Course Alignment")
     
-    add_card(s2, 0.8, 1.8, 5.6, 5.0, "The Fintech Dilemma", [
-        "Cryptocurrency markets lack traditional institutional rating agencies (like Moody's or S&P).",
-        "Tokens exhibit extreme cross-sectional heterogeneity in volatility and liquidity depth.",
-        "Retail & institutional investors face severe tail risk and hidden illiquidity traps.",
-        "Standard market-cap rankings obscure asymmetric drawdown severity."
+    add_card(s2, 0.8, 1.8, 5.6, 5.0, "Problem Statement", [
+        "Topic: Fintech: Cryptocurrency Analysis.",
+        "Problem: Grouping cryptocurrencies into similar risk categories based on how much their prices change and how much they are traded.",
+        "Unlike stock markets, crypto lacks standardized risk ratings.",
+        "Investors need objective data-driven risk categories."
     ], title_color=NAVY)
     
-    add_card(s2, 6.8, 1.8, 5.7, 5.0, "Our Machine Learning Objective", [
-        "Formulation: Unsupervised Machine Learning (Clustering).",
-        "Target: Group assets into mathematically validated risk categories based on:",
-        "1. How much their prices change (Annualized Volatility, Max Drawdown, VaR 95%, CVaR).",
-        "2. How much they are traded (Log Dollar Volume, Volume Stability, Amihud Illiquidity).",
-        "Outcome: Objective, algorithmic risk taxonomy without subjective bias."
+    add_card(s2, 6.8, 1.8, 5.7, 5.0, "Alignment with CS2235 Syllabus", [
+        "Module 1: Data collection via API (yfinance), Pandas & NumPy.",
+        "Module 2: Building ETL pipeline & data quality checks.",
+        "Module 3: Unsupervised Machine Learning (no target labels).",
+        "Module 4: Feature Engineering, StandardScaler, PCA, K-Means Clustering & Silhouette Score evaluation.",
+        "Module 5: Application in Finance & Streamlit deployment."
     ], title_color=BLUE)
 
     # -------------------------------------------------------------
-    # SLIDE 3: DATASET & MULTI-ASSET TAXONOMY
+    # SLIDE 3: DATA INGESTION & QUALITY CHECKS (MODULES 1 & 2)
     # -------------------------------------------------------------
     s3 = prs.slides.add_slide(blank_layout)
-    add_header(s3, "Dataset Coverage & Data Integrity Pipeline")
+    add_header(s3, "Data Ingestion & Quality Checks (Modules 1 & 2)")
     
     add_card(s3, 0.8, 1.8, 5.6, 5.0, "Dataset Architecture", [
-        "Source: Yahoo Finance Financial API & CoinGecko benchmarks.",
-        "Horizon: 2 Full Years of continuous daily trading data (731 days).",
-        "Coverage: 28 selected cryptocurrencies (20,468 total daily records).",
-        "Zero Missing Values: Strictly audited for timestamp alignment and contiguous prices."
+        "Source: Yahoo Finance API (2 years of daily data).",
+        "Scale: 28 cryptocurrencies across 731 days (20,468 rows).",
+        "Measurement Scale (Module 1): Ratio scale for Price & Volume (continuous numerical with true zero).",
+        "Nominal scale for Symbol and Asset Category."
     ])
     
-    add_card(s3, 6.8, 1.8, 5.7, 5.0, "Diversified Asset Spectrum", [
-        "Stablecoins (Baseline): USDT, USDC, DAI (<0.7% Volatility).",
-        "Mega-Cap Blue-Chips: BTC, ETH, BNB (Institutional Depth).",
-        "Layer 1 / Layer 2 Platforms: SOL, XRP, ADA, AVAX, DOT, NEAR, ATOM, ALGO.",
-        "DeFi & Infrastructure: LINK, AAVE, MKR, LDO, CRV.",
-        "High-Beta & Meme Coins: DOGE, SHIB, BONK, FLOKI, WIF (>100% Volatility)."
+    add_card(s3, 6.8, 1.8, 5.7, 5.0, "Data Pipeline & Quality Checks (Module 2)", [
+        "Extract: Automated API data harvester in Python.",
+        "Transform: Date parsing, timestamp alignment, 0 missing values.",
+        "Quality Checks: Verified High >= Low, Close > 0, Volume >= 0.",
+        "Load: Cleaned consolidated dataset saved to CSV."
     ], title_color=GREEN)
 
     # -------------------------------------------------------------
-    # SLIDE 4: MATHEMATICAL FEATURE ENGINEERING
+    # SLIDE 4: FEATURE ENGINEERING (MODULE 4)
     # -------------------------------------------------------------
     s4 = prs.slides.add_slide(blank_layout)
-    add_header(s4, "Quantitative Feature Engineering Framework")
+    add_header(s4, "Feature Engineering (Module 4)")
     
-    add_card(s4, 0.8, 1.8, 5.6, 5.0, "Price Change & Volatility Metrics", [
-        "Annualized Volatility: σ_ann = σ_daily × √365",
-        "Maximum Drawdown (MDD): Peak-to-trough worst collapse percentage.",
-        "Value at Risk (95% VaR): 5th percentile of daily loss distribution.",
-        "Conditional VaR (CVaR): Expected Shortfall beyond the 95% threshold.",
-        "Sortino Ratio & Intraday High-Low Spread %."
+    add_card(s4, 0.8, 1.8, 5.6, 5.0, "Price Change Features", [
+        "Annualized Volatility (%): Daily return std dev × √365 × 100. Measures price fluctuations over a year.",
+        "Maximum Drawdown (%): Largest peak-to-trough price drop.",
+        "Mean Daily Spread (%): Average daily (High - Low) / Close."
     ])
     
-    add_card(s4, 6.8, 1.8, 5.7, 5.0, "Trading Volume & Liquidity Metrics", [
-        "Log10 Average Daily Volume (USD): Quantifies depth across orders of magnitude.",
-        "Volume Volatility (CV): Coefficient of variation of trading volume.",
-        "Amihud Illiquidity Ratio Proxy: Price impact per unit of trading volume.",
-        "Volatility-to-Volume Ratio: Speculation index measuring volume absorption capacity."
+    add_card(s4, 6.8, 1.8, 5.7, 5.0, "Trading Volume Features", [
+        "Average Daily Volume (USD): Mean dollar volume traded daily.",
+        "Log10 Average Volume: Brings billion-dollar volumes down to a linear scale (Module 4 scaling).",
+        "Volatility-to-Volume Ratio: Price fluctuation divided by volume depth."
     ], title_color=BLUE)
 
     # -------------------------------------------------------------
-    # SLIDE 5: CLUSTERING METHODOLOGY & OPTIMAL K
+    # SLIDE 5: K-MEANS CLUSTERING & MODEL EVALUATION (MODULE 4)
     # -------------------------------------------------------------
     s5 = prs.slides.add_slide(blank_layout)
-    add_header(s5, "Clustering Algorithms & Model Optimization")
+    add_header(s5, "K-Means Clustering & Hyperparameter Tuning (Module 4)")
     
-    add_card(s5, 0.8, 1.8, 5.6, 5.0, "Algorithms Evaluated", [
-        "K-Means++: Distance-based partitioning with optimized seeding.",
-        "Agglomerative Hierarchical: Ward's minimum variance Euclidean linkage.",
-        "Gaussian Mixture Models (GMM): Soft probabilistic clustering.",
-        "DBSCAN: Density-based spatial noise and outlier detection."
+    add_card(s5, 0.8, 1.8, 5.6, 5.0, "Feature Scaling & K-Means", [
+        "StandardScaler (Z-Score): Standardizes features so high volume doesn't dominate percentage volatility.",
+        "Algorithm: K-Means++ (probabilistic centroid initialization).",
+        "Hyperparameter Tuning: Tested k from 2 to 7."
     ])
     
-    add_card(s5, 6.8, 1.8, 5.7, 5.0, "Optimal K Validation Metrics", [
-        "Elbow Method: Pronounced inflection point at k = 4.",
-        "Silhouette Score: Peak separation quality at 0.3464.",
-        "Davies-Bouldin Index: 0.8382 (low within-cluster scatter vs. separation).",
-        "Calinski-Harabasz Index: 33.78 confirming dense, distinct clusters."
+    add_card(s5, 6.8, 1.8, 5.7, 5.0, "Evaluation: Elbow & Silhouette Score", [
+        "Elbow Method (WCSS): Distinct elbow observed at k = 4.",
+        "Silhouette Score: Peak score of 0.3868 achieved at k = 4.",
+        "Conclusion: Exactly 4 natural risk categories exist in the data."
     ], title_color=GREEN)
 
     # -------------------------------------------------------------
-    # SLIDE 6: EMPIRICAL FINDINGS & THE 4 RISK TIERS
+    # SLIDE 6: EMPIRICAL RISK CATEGORIES (THE 4 TIERS)
     # -------------------------------------------------------------
     s6 = prs.slides.add_slide(blank_layout)
-    add_header(s6, "Discovered Cryptocurrency Risk Taxonomy")
+    add_header(s6, "Discovered Cryptocurrency Risk Categories")
     
-    add_card(s6, 0.8, 1.8, 5.6, 2.4, "Tier 1: Ultra-Low Risk (Pegged)", [
-        "Assets: USDT, USDC, DAI (3 assets)",
-        "Mean Volatility: 0.43% | Max Drawdown: 0.26%",
-        "Role: Risk-off collateral, dollar pegs, cash management."
+    add_card(s6, 0.8, 1.8, 5.6, 2.4, "Tier 1: Ultra-Low Risk (Stablecoins)", [
+        "USDT, USDC, DAI (3 coins)",
+        "Mean Volatility: 0.4% | Max Drawdown: 0.3%",
+        "Pegged cash equivalent, minimal price change."
     ], title_color=GREEN)
     
-    add_card(s6, 6.8, 1.8, 5.7, 2.4, "Tier 2: Low-to-Moderate (Blue-Chips)", [
-        "Assets: BTC, ETH, BNB (3 assets)",
-        "Mean Volatility: 54.4% | Max Drawdown: 59.7%",
-        "Role: Core institutional anchors with >$2B daily liquidity."
+    add_card(s6, 6.8, 1.8, 5.7, 2.4, "Tier 2: Low-Moderate Risk (Blue-Chips)", [
+        "BTC, ETH, BNB, SOL, XRP (5 coins)",
+        "Mean Volatility: 64.8% | Max Drawdown: 65.5%",
+        "Established large-cap coins with deep liquidity."
     ], title_color=BLUE)
     
-    add_card(s6, 0.8, 4.4, 5.6, 2.4, "Tier 3: Moderate-to-High (Utility/DeFi)", [
-        "Assets: SOL, XRP, ADA, AVAX, DOT, LINK, etc. (12 assets)",
-        "Mean Volatility: 82.2% | Max Drawdown: 79.5%",
-        "Role: Ecosystem growth, network utility, smart contracts."
+    add_card(s6, 0.8, 4.4, 5.6, 2.4, "Tier 3: Moderate-High Risk (Utility/DeFi)", [
+        "ADA, AVAX, DOT, LINK, DOGE, LTC, etc. (12 coins)",
+        "Mean Volatility: 86.8% | Max Drawdown: 83.2%",
+        "Active ecosystem growth tokens with higher swings."
     ], title_color=RGBColor(217, 119, 6))
     
-    add_card(s6, 6.8, 4.4, 5.7, 2.4, "Tier 4: Extreme Speculative (Meme/Beta)", [
-        "Assets: BONK, WIF, FLOKI, SHIB, LDO, CRV (10 assets)",
-        "Mean Volatility: 112.5% | Max Drawdown: 86.8%",
-        "Role: Asymmetric speculation; requires strict stop-loss caps."
+    add_card(s6, 6.8, 4.4, 5.7, 2.4, "Tier 4: Extreme Risk (Meme Tokens)", [
+        "BONK, WIF, FLOKI, SHIB, NEAR, XLM, etc. (8 coins)",
+        "Mean Volatility: 114.2% | Max Drawdown: 87.7%",
+        "High speculation, severe drops, unpredictable swings."
     ], title_color=RGBColor(220, 38, 38))
 
     # -------------------------------------------------------------
-    # SLIDE 7: DIMENSIONALITY REDUCTION & VISUALIZATION
+    # SLIDE 7: DIMENSIONALITY REDUCTION: PCA BASICS (MODULE 4)
     # -------------------------------------------------------------
     s7 = prs.slides.add_slide(blank_layout)
-    add_header(s7, "PCA Latent Space & Volatility-Volume Frontier")
+    add_header(s7, "PCA Basics & Volatility vs. Volume Frontier (Module 4)")
     
-    add_card(s7, 0.8, 1.8, 5.6, 5.0, "Principal Component Analysis (PCA)", [
-        "PCA Component 1 explains 72.8% of variance (Volatility & Tail Risk loading).",
-        "PCA Component 2 explains 21.0% of variance (Liquidity & Turnover loading).",
-        "Cumulative 2D Explained Variance: 93.78% (3D: 97.49%).",
-        "Zero-overlap boundary separation across all 4 discovered clusters."
+    add_card(s7, 0.8, 1.8, 5.6, 5.0, "2D PCA Visualization", [
+        "PCA reduces 5 features into 2 Principal Components.",
+        "Component 1: Captures Price Volatility & Drawdowns (79.8%).",
+        "Component 2: Captures Trading Volume Depth (17.1%).",
+        "Total 2D Explained Variance: 96.94% (clear visual separation)."
     ], title_color=NAVY)
     
-    add_card(s7, 6.8, 1.8, 5.7, 5.0, "Core Problem Statement Findings", [
-        "High Trading Volume does not always eliminate volatility (e.g. DOGE, SHIB).",
-        "Tokens with identical returns have drastically divergent tail drawdowns.",
-        "Stablecoins cluster into an isolated, hyper-dense centroid.",
-        "Provides clear empirical evidence for dynamic risk-based capital allocation."
+    add_card(s7, 6.8, 1.8, 5.7, 5.0, "Key Financial Findings", [
+        "Stablecoins group together with massive volume and near-zero volatility.",
+        "Bitcoin and Ethereum have deep liquidity that cushions drawdowns.",
+        "Meme coins (BONK, WIF) show extreme price changes despite moderate volume."
     ], title_color=BLUE)
 
     # -------------------------------------------------------------
-    # SLIDE 8: DEPLOYMENT DEMO & CONCLUSION
+    # SLIDE 8: STREAMLIT DEPLOYMENT & SUMMARY (MODULE 5)
     # -------------------------------------------------------------
     s8 = prs.slides.add_slide(blank_layout)
-    add_header(s8, "Interactive Deployment & Strategic Takeaways")
+    add_header(s8, "Streamlit Deployment & Project Summary (Module 5)")
     
-    add_card(s8, 0.8, 1.8, 5.6, 5.0, "Interactive Streamlit Deployment", [
-        "Web Dashboard (`app.py`) for real-time risk inspection.",
-        "Interactive 2D Volatility vs. Volume liquidity frontier.",
-        "Live Risk Classifier: Predicts risk tier for custom/new tokens.",
-        "Dynamic Portfolio Allocator: Custom weights by investor risk profile."
+    add_card(s8, 0.8, 1.8, 5.6, 5.0, "Interactive Streamlit App (app.py)", [
+        "Interactive Volatility vs. Volume scatter plot.",
+        "Searchable Risk Matrix table for all 28 assets.",
+        "Live Risk Classifier: Predicts risk tier for custom coins.",
+        "Portfolio Allocator: Suggests weights based on risk tolerance."
     ], title_color=GREEN)
     
-    add_card(s8, 6.8, 1.8, 5.7, 5.0, "Capstone Deliverables Summary", [
-        "Project Proposal: Formal problem framing & team roles.",
-        "Jupyter Notebooks: Complete 4-phase reproducible pipelines.",
-        "Academic Technical Report: 10-page comprehensive thesis.",
-        "Presentation & Viva Voce Guide: Confident technical defense.",
-        "GitHub Repository: Structured, version-controlled repository."
+    add_card(s8, 6.8, 1.8, 5.7, 5.0, "Capstone Checklist Completed", [
+        "Phase 1 Proposal: Project title, dataset, objectives.",
+        "Phase 2 & 3: Cleaned data and ETL feature notebook.",
+        "Phase 4 & 5: K-Means clustering, PCA, and Streamlit demo.",
+        "Phase 6: 10-page final report, 8 slides PPTX, Viva guide.",
+        "All code version-controlled on GitHub."
     ], title_color=NAVY)
     
     os.makedirs(os.path.dirname(output_path), exist_ok=True)

@@ -12,63 +12,62 @@
 
 ## 📌 Executive Summary & Problem Statement
 
-> **"Fintech: Cryptocurrency Analysis — Grouping cryptocurrencies into similar risk categories based on how much their prices change (volatility, drawdowns, tail risk) and how much they are traded (trading volume depth, turnover, illiquidity proxies)."**
+> **"Fintech: Cryptocurrency Analysis — Grouping cryptocurrencies into similar risk categories based on how much their prices change (volatility, drawdowns) and how much they are traded (trading volume)."**
 
-Unlike traditional financial equity and debt markets—where centralized rating agencies (Moody's, S&P) provide formal credit ratings and sector standards—the digital asset ecosystem lacks standardized risk classification. Market participants frequently fall victim to the **"liquidity illusion"**, confusing superficial token market caps with genuine trading depth, or underestimating catastrophic downside tail risk.
+Unlike traditional stock markets where companies are assigned standardized risk and sector ratings, the digital currency ecosystem lacks clear risk classifications. Market participants often struggle to distinguish between stable assets, large utility platforms, and highly volatile speculative tokens.
 
-This project delivers an end-to-end **unsupervised machine learning framework** that analyzes continuous 2-year daily historical market data across **28 representative cryptocurrencies** (20,468 observations) spanning stablecoins, blue-chips, layer-1 platforms, DeFi protocols, and speculative meme tokens. By engineering 8 quantitative price volatility and trading liquidity features, the pipeline clusters assets into four mathematically validated risk tiers ($k = 4$, Silhouette: $0.3464$, Davies-Bouldin: $0.8382$, PCA 2D Explained Variance: $93.78\%$).
+This project delivers an end-to-end data science pipeline aligned strictly with **Modules 1 through 5 of the CS2235 Capstone syllabus**. Using continuous 2-year daily historical market data across **28 representative cryptocurrencies** (20,468 observations) collected via the Yahoo Finance API, we build an ETL pipeline, engineer 5 core features, apply `StandardScaler`, and train a **K-Means Clustering** model ($k = 4$, Silhouette Score: $0.3868$, 2D PCA Total Explained Variance: $96.94\%$).
 
 ---
 
-## 🏗️ Project Architecture & End-to-End Workflow
+## 🏗️ Project Architecture & End-to-End Workflow (Modules 1 to 5)
 
 ```mermaid
 flowchart TD
-    A["Raw Data Ingestion (Yahoo Finance API)
-2-Year Daily OHLCV for 28 Assets"] --> B["Data Cleaning & Quality Audit
-Contiguous Dates, 0 Missing Values"]
-    B --> C["Mathematical Feature Engineering
-• Volatility: σ_ann, Max Drawdown, 95% VaR, CVaR, Daily Spread
-• Liquidity: Log Volume, Volume CV, Amihud Proxy, Vol/Volume"]
-    C --> D["Feature Standardization
+    A["Module 1: Data Collection (Yahoo Finance API)
+2-Year Daily OHLCV for 28 Cryptocurrencies"] --> B["Module 2: Batch ETL Pipeline & Quality Checks
+0 Missing Values, Timestamp Alignment"]
+    B --> C["Module 4: Feature Engineering
+• Volatility: Annualized Volatility, Max Drawdown, Daily Spread
+• Trading Volume: Daily Dollar Volume, Log10 Volume, Vol/Volume"]
+    C --> D["Module 4: Feature Standardization
 Z-Score Normalization (StandardScaler)"]
-    D --> E["Dimensionality Reduction
-2D/3D PCA (93.8% Var) & t-SNE"]
-    D --> F["Clustering Algorithms Evaluation
-K-Means++, Hierarchical Ward, GMM, DBSCAN"]
-    F --> G["Cluster Validation (Optimal k=4)
-Elbow WCSS, Silhouette, Davies-Bouldin, Calinski-Harabasz"]
-    G --> H["Empirical Risk Tier Mapping
+    D --> E["Module 4: Dimensionality Reduction
+2D PCA (96.94% Variance Explained)"]
+    D --> F["Module 4: Clustering Algorithm
+K-Means Clustering (k-means++)"]
+    F --> G["Module 4: Model Evaluation (Optimal k=4)
+Elbow Method (WCSS/Inertia) & Silhouette Score (0.3868)"]
+    G --> H["Risk Category Mapping
 Tier 1: Ultra-Low | Tier 2: Low-Mod | Tier 3: Mod-High | Tier 4: Extreme"]
-    H --> I["Deliverables
-• Master & Phase Notebooks
-• Academic Final Report (2500+ words)
-• 8-Slide PowerPoint Presentation (.pptx)
+    H --> I["Module 5: Deliverables & Deployment
+• Jupyter Notebooks (Phase 2 to 5 + Master)
+• Academic Report & 8-Slide Presentation
 • Interactive Streamlit Web App (app.py)"]
 ```
 
 ---
 
-## 🔬 Discovered Risk Taxonomy (The 4 Tiers)
+## 🔬 Discovered Risk Categories (The 4 Tiers)
 
-| Risk Tier | Constituent Digital Assets | Asset Count | Mean Annualized Volatility (%) | Mean Max Drawdown (%) | Mean 95% Daily VaR (%) | Mean Daily Volume (USD) | Economic Role & Investor Recommendation |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **Tier 1: Ultra-Low Risk** | `USDT`, `USDC`, `DAI` | 3 | **0.43%** | **0.26%** | **0.05%** | **$37.8 Billion** | **Pegged Stability / Cash Management:** Near-zero volatility, dollar-backed collateral, risk-off treasury buffer. |
-| **Tier 2: Low-to-Moderate Risk** | `BTC`, `ETH`, `BNB` | 3 | **54.45%** | **59.67%** | **4.32%** | **$24.1 Billion** | **Institutional Blue-Chips:** Core foundational portfolio anchors with deep multi-billion-dollar liquidity cushions. |
-| **Tier 3: Moderate-to-High Risk** | `SOL`, `XRP`, `ADA`, `AVAX`, `DOT`, `LINK`, `DOGE`, `LTC`, `BCH`, `ATOM`, `ETC`, `AAVE` | 12 | **82.21%** | **79.48%** | **7.14%** | **$1.37 Billion** | **Ecosystem & Utility Platforms:** High-growth smart contract and DeFi tokens; suitable for active growth allocations. |
-| **Tier 4: Extreme Speculative Risk** | `BONK`, `WIF`, `FLOKI`, `SHIB`, `NEAR`, `XLM`, `MKR`, `ALGO`, `LDO`, `CRV` | 10 | **112.53%** | **86.83%** | **9.81%** | **$272.5 Million** | **Speculative Meme & High-Beta:** Severe downside tail risk (>85% drawdowns); requires strict capital caps & stop-losses. |
+| Risk Category | Constituent Digital Assets | Coin Count | Mean Volatility (%) | Mean Max Drawdown (%) | Mean Daily Volume (USD) | Economic Role & Strategy |
+| :--- | :--- | :---: | :---: | :---: | :---: | :--- |
+| **Tier 1: Ultra-Low Risk** | `USDT`, `USDC`, `DAI` | 3 | **0.43%** | **0.26%** | **$37.8 Billion** | **Pegged Cash Stability:** Near-zero volatility, risk-off treasury buffer. |
+| **Tier 2: Low-to-Moderate Risk** | `BTC`, `ETH`, `BNB`, `SOL`, `XRP` | 5 | **64.80%** | **65.50%** | **$16.5 Billion** | **Institutional Blue-Chips:** Core portfolio anchors with multi-billion-dollar daily liquidity depth. |
+| **Tier 3: Moderate-to-High Risk** | `ADA`, `AVAX`, `DOT`, `LINK`, `DOGE`, `LTC`, `BCH`, `ATOM`, `ETC`, `AAVE`, `MKR`, `CRV` | 12 | **86.80%** | **83.20%** | **$785.4 Million** | **Utility & Ecosystem Protocols:** Higher growth and active price swings. |
+| **Tier 4: Extreme Speculative Risk** | `BONK`, `WIF`, `FLOKI`, `SHIB`, `NEAR`, `XLM`, `ALGO`, `LDO` | 8 | **114.20%** | **87.70%** | **$248.1 Million** | **Speculative Meme Tokens:** Extreme price fluctuations (>114%) and deep drawdowns (>87%). |
 
 ---
 
 ## 📊 Key Visualizations & Findings
 
-| Volatility vs. Volume Frontier (Problem Statement) | 2D PCA Risk Clusters (93.78% Variance) |
+| Volatility vs. Volume Frontier (Problem Statement) | 2D PCA Risk Clusters (96.94% Variance) |
 | :---: | :---: |
 | ![Volatility vs Volume](docs/figures/01_volatility_vs_volume.png) | ![PCA Projection](docs/figures/05_pca_clusters_2d.png) |
 
-| Optimal k Evaluation (Elbow & Silhouette) | Hierarchical Dendrogram (Ward Linkage) |
+| Optimal k Evaluation (Elbow & Silhouette) | Cluster Risk Comparison |
 | :---: | :---: |
-| ![Optimal K](docs/figures/04_optimal_k_evaluation.png) | ![Hierarchical Dendrogram](docs/figures/06_hierarchical_dendrogram.png) |
+| ![Optimal K](docs/figures/04_optimal_k_evaluation.png) | ![Cluster Comparison](docs/figures/07_cluster_risk_comparison.png) |
 
 ---
 
@@ -80,18 +79,19 @@ Capstone_DS/
 │   ├── raw/
 │   │   └── crypto_historical_raw.csv        # 2-Year daily OHLCV dataset (20,468 rows)
 │   ├── processed/
-│   │   ├── crypto_risk_features.csv         # 22 quantitative risk & liquidity metrics
-│   │   └── crypto_clustered_results.csv     # Final clustered dataset with PCA & risk tiers
+│   │   ├── crypto_risk_features.csv         # Engineered risk & trading volume features
+│   │   └── crypto_clustered_results.csv     # Clustered dataset with PCA & risk tiers
 │   └── models/
 │       ├── kmeans_model.joblib              # Trained K-Means model
 │       ├── scaler.joblib                    # StandardScaler transformer
-│       ├── pca_model.joblib                 # PCA 2D/3D transformer
+│       ├── pca_model.joblib                 # PCA 2D transformer
 │       └── metrics_summary.json             # Model evaluation validation metrics
 ├── docs/
-│   ├── figures/                             # 7 high-resolution publication charts
+│   ├── figures/                             # High-resolution charts (PNG)
 │   ├── Project_Proposal.md                  # Capstone Phase 1 formal proposal
-│   ├── Final_Project_Report.md              # 10-page academic capstone report (~2,800 words)
-│   └── Viva_Voce_Preparation_Guide.md       # Comprehensive 12-question viva defense guide
+│   ├── Final_Project_Report.md              # Final report matching university format
+│   ├── Final_Project_Report.docx            # Formatted Microsoft Word report
+│   └── Viva_Voce_Preparation_Guide.md       # 10-question viva defense guide (Modules 1-5)
 ├── notebooks/
 │   ├── 01_data_collection_and_cleaning.ipynb
 │   ├── 02_etl_and_feature_engineering.ipynb
@@ -104,14 +104,15 @@ Capstone_DS/
 │   └── SLIDES.md                                   # Markdown presentation script
 ├── src/
 │   ├── data_collection.py                   # Automated Yahoo Finance OHLCV harvester
-│   ├── feature_engineering.py               # Volatility, MDD, VaR, CVaR, Amihud extraction
-│   ├── clustering_models.py                 # K-Means, Hierarchical, GMM, DBSCAN pipeline
-│   ├── visualization.py                     # Publication-quality figure generation
-│   └── generate_notebooks.py                # nbformat automated notebook generator
+│   ├── feature_engineering.py               # Volatility, MDD, Spread, Volume extraction
+│   ├── clustering_models.py                 # K-Means clustering & PCA pipeline
+│   ├── visualization.py                     # Figure generation
+│   ├── generate_notebooks.py                # nbformat notebook generator
+│   └── generate_docx_report.py              # Word report generator
 ├── app.py                                   # Streamlit interactive web deployment
 ├── requirements.txt                         # Python dependencies
 ├── .gitignore                               # Git ignore configuration
-└── README.md                                # Comprehensive repository documentation
+└── README.md                                # Repository documentation
 ```
 
 ---
@@ -135,52 +136,20 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Run the Data & Modeling Pipeline
+### 3. Launch the Interactive Streamlit Web App
 ```bash
-# 1. Collect real-world cryptocurrency market history
-python src/data_collection.py
-
-# 2. Extract quantitative risk and liquidity features
-python src/feature_engineering.py
-
-# 3. Train clustering algorithms and evaluate optimal k
-python src/clustering_models.py
-
-# 4. Generate all high-res publication figures
-python src/visualization.py
+python -m streamlit run app.py
 ```
-
-### 4. Launch the Interactive Streamlit Web App
-```bash
-streamlit run app.py
-```
-The dashboard opens in your browser at `http://localhost:8501`, featuring:
-- **Market Risk Frontier:** Interactive Volatility vs. Volume scatter plot.
-- **Asset Risk Matrix:** Filterable, searchable table across all 28 assets.
-- **Model Diagnostics:** 2D PCA latent space and hierarchical dendrogram.
-- **Live Risk Classifier:** Input any custom token's volatility and volume to predict its risk tier in real time.
-- **Portfolio Risk Allocator:** Dynamic asset weighting based on investor risk tolerance.
+Open your browser at `http://localhost:8501`.
 
 ---
 
-## 🎓 Academic Alignment & Evaluation Scheme
+## 🎓 Academic Alignment (CS2235 Syllabus)
 
-This project satisfies all requirements outlined in the **RV University CS2235 Capstone Guidelines (25 Marks Total)**:
-
-| Capstone Deliverable | File / Implementation | Status |
-| :--- | :--- | :---: |
-| **Project Proposal** | [`docs/Project_Proposal.md`](docs/Project_Proposal.md) | ✅ Complete |
-| **Jupyter Notebooks** | [`notebooks/Cryptocurrency_Risk_Analysis_Capstone.ipynb`](notebooks/Cryptocurrency_Risk_Analysis_Capstone.ipynb) | ✅ Complete |
-| **Technical Report** | [`docs/Final_Project_Report.md`](docs/Final_Project_Report.md) (8–10 pages, 2,800 words) | ✅ Complete |
-| **Presentation Deck**| [`presentation/crypto_risk_clustering_presentation.pptx`](presentation/crypto_risk_clustering_presentation.pptx) (8 slides) | ✅ Complete |
-| **Deployment Demo**  | [`app.py`](app.py) (Streamlit interactive fintech dashboard) | ✅ Complete |
-| **Viva Voce Prep**   | [`docs/Viva_Voce_Preparation_Guide.md`](docs/Viva_Voce_Preparation_Guide.md) (10 Marks Weightage) | ✅ Complete |
-
----
-
-## 👩‍💻 Author & Acknowledgements
-- **Lead Researcher:** **Thanisha S Rao** ([@thanishasrao](https://github.com/thanishasrao))
-- **Programme:** B.Sc (Hons.) Data Science, Semester III, School of Computer Science & Engineering
-- **Institution:** RV University, Bengaluru, India
-- **Course Instructors:** Prof. Muralidhar Billa, Prof. Thirukumaran Subbiramani
-- **License:** MIT License
+| Course Module | Syllabus Topic | Implementation in this Capstone |
+| :--- | :--- | :--- |
+| **Module 1: Data Science Lifecycle** | Data Collection via API, Pandas/NumPy, Data Types | Ingested daily OHLCV data using Yahoo Finance API into Pandas. Ratio scale (price, volume), Nominal (symbol). |
+| **Module 2: Data Ingestion & ETL** | Batch ETL Pipelines, Data Validation & Quality Checks | `data_collection.py` extracts raw data; `feature_engineering.py` transforms into returns & volatility; verified 0 nulls. |
+| **Module 3: Machine Learning** | Supervised vs. Unsupervised Learning | Formulated as Unsupervised Learning (Clustering) since there are no predefined risk target labels. |
+| **Module 4: Modeling & Features** | Feature Scaling, PCA Basics, K-Means, Silhouette Score | Used `StandardScaler`, 2D PCA (96.94% variance), K-Means++ clustering with optimal $k=4$ confirmed via Elbow & Silhouette score (0.3868). |
+| **Module 5: Deployment & Finance** | Applications in Finance, Streamlit Deployment | Deployed interactive Streamlit dashboard (`app.py`) with risk classification and portfolio simulation. |

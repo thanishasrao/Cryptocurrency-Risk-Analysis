@@ -1,6 +1,7 @@
 """
 Visualization Module for Cryptocurrency Risk Analysis
 CS2235 - Module 4 & 5: Visualizing Clusters, PCA, and the Risk Frontier
+Strictly follows syllabus: K-Means clusters, PCA 2D scatter, Elbow & Silhouette plots.
 """
 
 import os
@@ -9,8 +10,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from scipy.cluster.hierarchy import dendrogram, linkage
-from sklearn.preprocessing import StandardScaler
 
 # Set clean aesthetic styling
 plt.style.use("seaborn-v0_8-whitegrid" if "seaborn-v0_8-whitegrid" in plt.style.available else "default")
@@ -143,29 +142,6 @@ def plot_pca_clusters(df, save_path=os.path.join(OUTPUT_DIR, "05_pca_clusters_2d
     print(f"[+] Saved: {save_path}")
 
 
-def plot_hierarchical_dendrogram(df, save_path=os.path.join(OUTPUT_DIR, "06_hierarchical_dendrogram.png")):
-    """Generates a clean tree dendrogram for asset similarity."""
-    feature_cols = [
-        "Annualized_Volatility_%", "Max_Drawdown_%", "Mean_Daily_Spread_%", 
-        "Log_Avg_Volume_USD", "Vol_to_Volume_Ratio"
-    ]
-    X_scaled = StandardScaler().fit_transform(df[feature_cols].values)
-    linkage_matrix = linkage(X_scaled, method="ward")
-    
-    fig, ax = plt.subplots(figsize=(12, 5.5), dpi=300)
-    dendrogram(linkage_matrix, labels=df["Symbol"].values, leaf_rotation=90, leaf_font_size=9, ax=ax)
-    
-    ax.set_title("Hierarchical Clustering Dendrogram (Asset Similarity Tree)", fontsize=13, fontweight="bold", pad=12)
-    ax.set_xlabel("Cryptocurrency Symbol", fontsize=10, fontweight="bold")
-    ax.set_ylabel("Distance (Dissimilarity)", fontsize=10, fontweight="bold")
-    ax.grid(False)
-    
-    plt.tight_layout()
-    plt.savefig(save_path, bbox_inches="tight")
-    plt.close()
-    print(f"[+] Saved: {save_path}")
-
-
 def plot_cluster_summary_bars(df, save_path=os.path.join(OUTPUT_DIR, "07_cluster_risk_comparison.png")):
     """Simple bar chart comparing mean Volatility and Volume across the 4 clusters."""
     metrics = ["Annualized_Volatility_%", "Max_Drawdown_%", "Log_Avg_Volume_USD"]
@@ -206,12 +182,11 @@ def generate_all_visualizations(clustered_csv="data/processed/crypto_clustered_r
         raise FileNotFoundError(f"Clustered results not found: {clustered_csv}")
         
     df = pd.read_csv(clustered_csv)
-    print("[*] Generating beginner-friendly visual figures (Modules 4 & 5)...")
+    print("[*] Generating syllabus-aligned visual figures (Modules 4 & 5)...")
     plot_volatility_vs_volume(df)
     plot_feature_correlation(df)
     plot_optimal_k_metrics()
     plot_pca_clusters(df)
-    plot_hierarchical_dendrogram(df)
     plot_cluster_summary_bars(df)
     print(f"[+] All figures successfully generated and saved to: {OUTPUT_DIR}")
 

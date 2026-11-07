@@ -2,12 +2,11 @@
 Machine Learning Clustering Pipeline for Cryptocurrency Risk Analysis
 CS2235 - Module 4: Feature Scaling, PCA, K-Means Clustering & Silhouette Evaluation
 
-Implements:
+Strictly adheres to CS2235 syllabus:
 1. Feature Scaling (StandardScaler)
 2. Dimensionality Reduction (PCA basics in 2D)
 3. Optimal k determination via Elbow Method (WCSS/Inertia) and Silhouette Score
 4. K-Means Clustering (Hyperparameter tuning for k)
-5. Hierarchical Clustering (for Dendrogram visualization)
 """
 
 import os
@@ -17,7 +16,7 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-from sklearn.cluster import KMeans, AgglomerativeClustering
+from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score, davies_bouldin_score
 
 # Core features taught in Module 4 representing price change and trading volume
@@ -86,14 +85,9 @@ def run_clustering_pipeline(input_path="data/processed/crypto_risk_features.csv"
     kmeans = KMeans(n_clusters=n_clusters, init="k-means++", n_init=25, random_state=random_state)
     raw_kmeans_labels = kmeans.fit_predict(X_scaled)
     
-    # 5. Simple Agglomerative Hierarchical Clustering (for dendrogram)
-    hierarchical = AgglomerativeClustering(n_clusters=n_clusters, metric="euclidean", linkage="ward")
-    hierarchical_labels = hierarchical.fit_predict(X_scaled)
-    
     df["Raw_Cluster"] = raw_kmeans_labels
-    df["Hierarchical_Cluster"] = hierarchical_labels
     
-    # 6. Sort and Rank Clusters into Financial Risk Tiers
+    # 5. Sort and Rank Clusters into Financial Risk Tiers
     # Rank clusters based on mean Annualized Volatility and Drawdown
     cluster_risk_rank = (
         df.groupby("Raw_Cluster")[["Annualized_Volatility_%", "Max_Drawdown_%"]]

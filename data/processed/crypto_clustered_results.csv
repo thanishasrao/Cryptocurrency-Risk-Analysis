@@ -1,29 +1,29 @@
-Symbol,Name,Ticker,Asset_Category,Annualized_Volatility_%,Max_Drawdown_%,Mean_Daily_Spread_%,Annualized_Return_%,Avg_Daily_Volume_USD,Log_Avg_Volume_USD,Vol_to_Volume_Ratio,PCA1,PCA2,Raw_Cluster,Hierarchical_Cluster,Risk_Cluster_ID,Risk_Category,Risk_Tier
-BONK,Bonk,BONK-USD,Solana Meme Token,143.38,96.3,8.23,7.22,242247793.5526676,8.384,17.101,2.8069,0.4105,2,0,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
-WIF,dogwifhat,WIF-USD,Speculative Meme Coin,122.26,96.76,9.11,-51.69,249979632.3461012,8.398,14.558,2.4156,0.3278,2,0,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
-LDO,Lido DAO,LDO-USD,Liquid Staking,109.37,89.96,8.1,3.3,104038978.29548565,8.017,13.641,2.0079,-0.3236,2,0,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
-CRV,Curve DAO,CRV-USD,Stablecoin AMM,108.17,85.52,8.19,64.79,152301421.5471956,8.183,13.219,1.813,-0.212,2,0,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
-FLOKI,Floki,FLOKI-USD,Utility Meme Token,107.18,92.45,7.75,-30.98,127303994.65800272,8.105,13.225,1.8628,-0.239,2,0,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
-SHIB,Shiba Inu,SHIB-USD,Ecosystem Meme Token,106.49,87.88,5.81,-11.13,309760120.36798906,8.491,12.541,1.1403,-0.0294,0,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
-NEAR,Near Protocol,NEAR-USD,Sharded L1,103.47,88.03,7.69,57.96,357473357.0889193,8.553,12.097,1.3952,0.1381,2,0,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
-XLM,Stellar Lumens,XLM-USD,Cross-Border Payment,103.17,74.81,6.43,78.45,396277550.1477428,8.598,11.999,0.8951,-0.0736,0,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
-ADA,Cardano,ADA-USD,Proof-of-Stake L1,100.06,88.35,6.51,15.28,974628683.3283174,8.989,11.132,0.8113,0.4941,0,1,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
-MKR,Maker,MKR-USD,DeFi Governance / CDP,99.23,60.92,8.09,59.13,47453790.30811554,7.676,12.927,1.476,-1.1384,2,0,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
-AAVE,Aave,AAVE-USD,Lending Protocol,97.03,84.14,7.07,45.24,387848163.1928865,8.589,11.297,1.0172,0.0347,0,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
-ALGO,Algorand,ALGO-USD,Pure PoS L1,96.83,84.87,7.11,36.25,119182795.96853626,8.076,11.99,1.3503,-0.4902,2,0,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
-DOT,Polkadot,DOT-USD,Interoperability Protocol,88.6,92.99,6.45,-32.21,256656852.84404925,8.409,10.536,0.9252,-0.1424,0,1,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
-LINK,Chainlink,LINK-USD,Decentralized Oracle,87.33,75.45,6.27,39.51,661652654.3543092,8.821,9.9,0.3241,0.0368,0,1,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
-DOGE,Dogecoin,DOGE-USD,Meme Currency,87.16,85.24,6.29,0.25,2246319138.4610124,9.351,9.321,0.174,0.7198,0,1,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
-AVAX,Avalanche,AVAX-USD,Modular L1,86.86,89.05,6.39,-13.39,486091563.9083448,8.687,9.999,0.6366,0.0793,0,1,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
-XRP,Ripple,XRP-USD,Payment / Settlement,84.2,72.1,5.62,78.79,4826729084.868673,9.684,8.695,-0.4369,0.8297,3,2,1,Tier 2: Low-to-Moderate Risk (Blue-Chip / Deep Liquidity),Low-Moderate Risk
-ATOM,Cosmos,ATOM-USD,Interoperability Hub,80.0,88.26,5.87,-19.18,112934166.91928864,8.053,9.935,0.7173,-0.6805,0,1,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
-BCH,Bitcoin Cash,BCH-USD,Payment Network,77.94,70.97,5.39,19.2,378286897.5882353,8.578,9.086,-0.0259,-0.4056,0,1,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
-SOL,Solana,SOL-USD,High-Throughput L1,76.43,76.25,5.65,1.24,4746706416.897401,9.676,7.899,-0.5525,0.8192,3,2,1,Tier 2: Low-to-Moderate Risk (Blue-Chip / Deep Liquidity),Low-Moderate Risk
-ETC,Ethereum Classic,ETC-USD,Legacy Smart Contract,75.98,84.19,5.51,-18.73,140337311.51436388,8.147,9.325,0.4143,-0.6902,0,1,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
-LTC,Litecoin,LTC-USD,Payment Network,72.53,70.18,5.33,15.37,583226360.8385773,8.766,8.275,-0.301,-0.2643,0,1,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
-ETH,Ethereum,ETH-USD,Smart Contract Platform,69.19,67.61,5.12,18.46,24064442190.95896,10.381,6.664,-1.3612,1.356,3,2,1,Tier 2: Low-to-Moderate Risk (Blue-Chip / Deep Liquidity),Low-Moderate Risk
-BNB,Binance Coin,BNB-USD,Exchange / Ecosystem,49.83,58.35,3.65,22.7,2097960837.4733243,9.322,5.345,-1.7151,-0.1192,3,2,1,Tier 2: Low-to-Moderate Risk (Blue-Chip / Deep Liquidity),Low-Moderate Risk
-BTC,Bitcoin,BTC-USD,Blue-Chip Store of Value,44.32,53.06,3.35,15.4,46302705259.187416,10.666,4.155,-2.6939,1.1619,3,2,1,Tier 2: Low-to-Moderate Risk (Blue-Chip / Deep Liquidity),Low-Moderate Risk
-USDT,Tether,USDT-USD,USD Pegged Stablecoin,0.61,0.45,0.16,-0.03,96303920006.01231,10.984,0.055,-5.3728,0.2706,1,3,0,Tier 1: Ultra-Low Risk (Pegged / Stablecoins),Ultra-Low Risk
-DAI,Dai,DAI-USD,Decentralized Stablecoin,0.41,0.21,0.09,0.0,3695830383.1928864,9.568,0.043,-4.7334,-1.2305,1,3,0,Tier 1: Ultra-Low Risk (Pegged / Stablecoins),Ultra-Low Risk
-USDC,USD Coin,USDC-USD,USD Pegged Stablecoin,0.27,0.11,0.14,-0.0,13423489438.875511,10.128,0.027,-4.9903,-0.6396,1,3,0,Tier 1: Ultra-Low Risk (Pegged / Stablecoins),Ultra-Low Risk
+Symbol,Name,Ticker,Asset_Category,Annualized_Volatility_%,Max_Drawdown_%,Mean_Daily_Spread_%,Annualized_Return_%,Avg_Daily_Volume_USD,Log_Avg_Volume_USD,Vol_to_Volume_Ratio,PCA1,PCA2,Raw_Cluster,Risk_Cluster_ID,Risk_Category,Risk_Tier
+BONK,Bonk,BONK-USD,Solana Meme Token,143.38,96.3,8.23,7.22,242247793.5526676,8.384,17.101,2.8069,0.4105,2,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
+WIF,dogwifhat,WIF-USD,Speculative Meme Coin,122.26,96.76,9.11,-51.69,249979632.3461012,8.398,14.558,2.4156,0.3278,2,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
+LDO,Lido DAO,LDO-USD,Liquid Staking,109.37,89.96,8.1,3.3,104038978.29548565,8.017,13.641,2.0079,-0.3236,2,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
+CRV,Curve DAO,CRV-USD,Stablecoin AMM,108.17,85.52,8.19,64.79,152301421.5471956,8.183,13.219,1.813,-0.212,2,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
+FLOKI,Floki,FLOKI-USD,Utility Meme Token,107.18,92.45,7.75,-30.98,127303994.65800272,8.105,13.225,1.8628,-0.239,2,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
+SHIB,Shiba Inu,SHIB-USD,Ecosystem Meme Token,106.49,87.88,5.81,-11.13,309760120.36798906,8.491,12.541,1.1403,-0.0294,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
+NEAR,Near Protocol,NEAR-USD,Sharded L1,103.47,88.03,7.69,57.96,357473357.0889193,8.553,12.097,1.3952,0.1381,2,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
+XLM,Stellar Lumens,XLM-USD,Cross-Border Payment,103.17,74.81,6.43,78.45,396277550.1477428,8.598,11.999,0.8951,-0.0736,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
+ADA,Cardano,ADA-USD,Proof-of-Stake L1,100.06,88.35,6.51,15.28,974628683.3283174,8.989,11.132,0.8113,0.4941,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
+MKR,Maker,MKR-USD,DeFi Governance / CDP,99.23,60.92,8.09,59.13,47453790.30811554,7.676,12.927,1.476,-1.1384,2,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
+AAVE,Aave,AAVE-USD,Lending Protocol,97.03,84.14,7.07,45.24,387848163.1928865,8.589,11.297,1.0172,0.0347,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
+ALGO,Algorand,ALGO-USD,Pure PoS L1,96.83,84.87,7.11,36.25,119182795.96853626,8.076,11.99,1.3503,-0.4902,2,3,Tier 4: Extreme Speculative Risk (High Volatility / Meme Tokens),Extreme Risk
+DOT,Polkadot,DOT-USD,Interoperability Protocol,88.6,92.99,6.45,-32.21,256656852.84404925,8.409,10.536,0.9252,-0.1424,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
+LINK,Chainlink,LINK-USD,Decentralized Oracle,87.33,75.45,6.27,39.51,661652654.3543092,8.821,9.9,0.3241,0.0368,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
+DOGE,Dogecoin,DOGE-USD,Meme Currency,87.16,85.24,6.29,0.25,2246319138.4610124,9.351,9.321,0.174,0.7198,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
+AVAX,Avalanche,AVAX-USD,Modular L1,86.86,89.05,6.39,-13.39,486091563.9083448,8.687,9.999,0.6366,0.0793,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
+XRP,Ripple,XRP-USD,Payment / Settlement,84.2,72.1,5.62,78.79,4826729084.868673,9.684,8.695,-0.4369,0.8297,3,1,Tier 2: Low-to-Moderate Risk (Blue-Chip / Deep Liquidity),Low-Moderate Risk
+ATOM,Cosmos,ATOM-USD,Interoperability Hub,80.0,88.26,5.87,-19.18,112934166.91928864,8.053,9.935,0.7173,-0.6805,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
+BCH,Bitcoin Cash,BCH-USD,Payment Network,77.94,70.97,5.39,19.2,378286897.5882353,8.578,9.086,-0.0259,-0.4056,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
+SOL,Solana,SOL-USD,High-Throughput L1,76.43,76.25,5.65,1.24,4746706416.897401,9.676,7.899,-0.5525,0.8192,3,1,Tier 2: Low-to-Moderate Risk (Blue-Chip / Deep Liquidity),Low-Moderate Risk
+ETC,Ethereum Classic,ETC-USD,Legacy Smart Contract,75.98,84.19,5.51,-18.73,140337311.51436388,8.147,9.325,0.4143,-0.6902,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
+LTC,Litecoin,LTC-USD,Payment Network,72.53,70.18,5.33,15.37,583226360.8385773,8.766,8.275,-0.301,-0.2643,0,2,Tier 3: Moderate-to-High Risk (Established Altcoins / DeFi),Moderate-High Risk
+ETH,Ethereum,ETH-USD,Smart Contract Platform,69.19,67.61,5.12,18.46,24064442190.95896,10.381,6.664,-1.3612,1.356,3,1,Tier 2: Low-to-Moderate Risk (Blue-Chip / Deep Liquidity),Low-Moderate Risk
+BNB,Binance Coin,BNB-USD,Exchange / Ecosystem,49.83,58.35,3.65,22.7,2097960837.4733243,9.322,5.345,-1.7151,-0.1192,3,1,Tier 2: Low-to-Moderate Risk (Blue-Chip / Deep Liquidity),Low-Moderate Risk
+BTC,Bitcoin,BTC-USD,Blue-Chip Store of Value,44.32,53.06,3.35,15.4,46302705259.187416,10.666,4.155,-2.6939,1.1619,3,1,Tier 2: Low-to-Moderate Risk (Blue-Chip / Deep Liquidity),Low-Moderate Risk
+USDT,Tether,USDT-USD,USD Pegged Stablecoin,0.61,0.45,0.16,-0.03,96303920006.01231,10.984,0.055,-5.3728,0.2706,1,0,Tier 1: Ultra-Low Risk (Pegged / Stablecoins),Ultra-Low Risk
+DAI,Dai,DAI-USD,Decentralized Stablecoin,0.41,0.21,0.09,0.0,3695830383.1928864,9.568,0.043,-4.7334,-1.2305,1,0,Tier 1: Ultra-Low Risk (Pegged / Stablecoins),Ultra-Low Risk
+USDC,USD Coin,USDC-USD,USD Pegged Stablecoin,0.27,0.11,0.14,-0.0,13423489438.875511,10.128,0.027,-4.9903,-0.6396,1,0,Tier 1: Ultra-Low Risk (Pegged / Stablecoins),Ultra-Low Risk
